@@ -1,17 +1,16 @@
 package com.quiz.controllers;
 
 import com.quiz.entities.Quiz;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import services.QuizService;
+
+import java.util.List;
 
 @RestController
 
 @RequestMapping
 public class QuizController {
-    private QuizService quizService;
+    private final QuizService quizService;
 
     public QuizController(QuizService quizService) {
         this.quizService = quizService;
@@ -25,6 +24,15 @@ public class QuizController {
     }
 
     //getAll
+    @GetMapping
+    public List<Quiz> get(){
+        return quizService.get();
+    }
 
+    //get One
+    @GetMapping("/{id}")
+    public Quiz getOne(@PathVariable Long id){
+        return quizService.get(id);
+    }
 
 }
